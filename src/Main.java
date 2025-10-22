@@ -5,11 +5,11 @@ public class Main {
 
         // CÉDULAS
         // cedula cliente
-        Cedula cedulaCliente = new Cedula("17678932", 'k');
-        //Cedula cedulaCliente = new Cedula("17678657932", 'k'); (cliente no puede arrendar)
+        //Cedula cedulaCliente = new Cedula("17678932", 'k');
+        Cedula cedulaCliente = new Cedula("17678657932", 'k'); //(cliente no puede arrendar)
 
         // cedula empleado
-       //Cedula cedulaEmpleado = new Cedula("17476678749", '8'); (empleado no autorizado)
+       //Cedula cedulaEmpleado = new Cedula("17476678749", '8'); //(empleado no autorizado)
         Cedula cedulaEmpleado = new Cedula("17477749", '8');
 
         Cedula cedulaGerente = new Cedula("15374648", '1');
@@ -49,8 +49,8 @@ public class Main {
                 "TOYOTA",
                 "YARIS",
                 2020,
-                //CondicionVehiculo.DISPONIBLE //asumo que el vehiculo esta disponible para poder arrendarlo
-                CondicionVehiculo.ARRENDADO
+                CondicionVehiculo.DISPONIBLE //asumo que el vehiculo esta disponible para poder arrendarlo
+                //CondicionVehiculo.ARRENDADO
         );
 
         int numeroArriendo = 567;
@@ -111,7 +111,7 @@ public class Main {
             return;
         }
 
-        System.out.println("\n--- 3. PROCESANDO ARRIENDO Y TICKET ---");
+        System.out.println("\n PROCESANDO ARRIENDO Y TICKET ---");
 
         if (cedulaEmpleado.esValida() && arriendoGenerado != null) {
             ticketFinal = empleado.ingresarArriendo(arriendoGenerado);
