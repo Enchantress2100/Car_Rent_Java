@@ -1,0 +1,86 @@
+@startuml
+
+title "Diagrama de Clases - Car Rent"
+
+' --- Value Objects y Enums ---
+class Cedula {
+  - numero: int
+  - digitoVerificador: char
+  + esValida(): boolean
+}
+note right of Cedula
+  **Formato RUT/Cédula**
+  ---
+  - Formato: 99999999-D
+  - D (dígito verificador): [0-9] o 'k'
+end note
+
+enum CondicionVehiculo {
+  DISPONIBLE
+  MANTENCION
+  ARRENDADO
+}
+
+' --- Clases de Usuario y Herencia ---
+abstract class Usuario {
+  - nombre: String
+}
+
+class Cliente extends Usuario {
+  - estaVigente: boolean
+  + solicitarArriendo(vehiculo): Arriendo
+  + pagarArriendo(arriendo)
+  + devolverVehiculo(arriendo)
+}
+
+' Empleado ahora contiene las tareas generales
+abstract class Empleado extends Usuario {
+    - idEmpleado: int
+    + ingresarArriendo(arriendo): boolean
+    + validarDevolucion(arriendo): boolean
+}
+
+' Gerente hereda directamente de Empleado
+class Gerente extends Empleado {
+  + validarCliente(cliente): boolean
+  + validarVehiculo(vehiculo): boolean
+}
+
+' --- Clases del Dominio ---
+class Vehiculo {
+ - patente: String[8]
+ - marca: String
+ - modelo: String
+ - añoFabricacion: int
+ - condicion: CondicionVehiculo
+}
+note right of Vehiculo::añoFabricacion
+  {rango: 2000 - 2025}
+end note
+
+class Arriendo {
+ - numeroArriendo: int
+ - fechaArriendo: Date
+ - numeroDiasArriendo: int
+ - montoArriendo: float
+ - estado: String
+ + generarCobro(): float
+ + generarTicket(): Ticket
+}
+note right of Arriendo::numeroDiasArriendo
+  {rango: 1 - 10 días}
+end note
+
+class Ticket {
+    - idTicket: int
+    - detalle: String
+}
+
+' --- Relaciones entre Clases ---
+Usuario "1" *-- "1" Cedula : "identificado por"
+Cliente "1" -- "0..*" Arriendo : "solicita"
+' La relación "gestiona" ahora parte de Empleado
+Empleado "1" -- "0..*" Arriendo : "gestiona"
+Vehiculo "1" -- "0..*" Arriendo : "es parte de"
+
+@enduml
