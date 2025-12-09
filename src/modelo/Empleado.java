@@ -1,12 +1,15 @@
-public class Empleado extends Usuario {
+package modelo;
+import java.io.Serializable;
+
+public class Empleado extends Usuario implements Serializable {
     protected int idEmpleado;
+
     public Empleado(String nombre, Cedula cedula, int idEmpleado) {
         super(nombre, cedula);
         this.idEmpleado = idEmpleado;
     }
 
-    // El empleado comprueba que el auto se puede arrendar.
-
+    //el empleado comprueba que el auto se puede arrendar.
     public boolean validarDisponibilidadVehiculo(Vehiculo vehiculo) {
         System.out.println("Empleado " + this.nombre + " validando vehículo: " + vehiculo.getPatente());
 
@@ -19,14 +22,13 @@ public class Empleado extends Usuario {
         }
     }
 
-    //El empleado guarda el arriendo y genera el ticket.
+    //el empleado guarda el arriendo y genera el ticket.
 
     public Ticket ingresarArriendo(Arriendo arriendo) {
         System.out.println("Empleado " + this.nombre + " ingresando arriendo N° " + arriendo.getNumeroArriendo() + " al sistema.");
         Ticket ticket = arriendo.generarTicket();
         arriendo.getVehiculo().setCondicion(CondicionVehiculo.ARRENDADO);
         System.out.println("-> Estado del vehículo " + arriendo.getVehiculo().getPatente() + " actualizado a ARRENDADO.");
-
         return ticket;
     }
 }

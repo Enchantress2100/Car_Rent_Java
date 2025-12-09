@@ -1,7 +1,9 @@
+package modelo;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Arriendo {
+public class Arriendo implements Serializable {
     private int numeroArriendo;
     private LocalDate fechaArriendo;
     private int numeroDiasArriendo;

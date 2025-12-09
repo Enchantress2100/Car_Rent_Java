@@ -21,7 +21,7 @@ enum CondicionVehiculo {
   ARRENDADO
 }
 
-' --- Clases de Usuario y Herencia ---
+' --- Clases de modelo.Usuario y Herencia ---
 abstract class Usuario {
   - nombre: String
 }
@@ -33,14 +33,14 @@ class Cliente extends Usuario {
   + devolverVehiculo(arriendo)
 }
 
-' Empleado ahora contiene las tareas generales
+' modelo.Empleado ahora contiene las tareas generales
 abstract class Empleado extends Usuario {
     - idEmpleado: int
     + ingresarArriendo(arriendo): boolean
     + validarDevolucion(arriendo): boolean
 }
 
-' Gerente hereda directamente de Empleado
+' modelo.Gerente hereda directamente de modelo.Empleado
 class Gerente extends Empleado {
   + validarCliente(cliente): boolean
   + validarVehiculo(vehiculo): boolean
@@ -79,7 +79,7 @@ class Ticket {
 ' --- Relaciones entre Clases ---
 Usuario "1" *-- "1" Cedula : "identificado por"
 Cliente "1" -- "0..*" Arriendo : "solicita"
-' La relación "gestiona" ahora parte de Empleado
+' La relación "gestiona" ahora parte de modelo.Empleado
 Empleado "1" -- "0..*" Arriendo : "gestiona"
 Vehiculo "1" -- "0..*" Arriendo : "es parte de"
 

@@ -1,5 +1,8 @@
-// Clase base para todos los usuarios del sistema.
-public abstract class Usuario {
+package modelo;
+import java.io.Serializable;
+
+//clase base para todos los usuarios del sistema.
+public abstract class Usuario implements Serializable {
     protected String nombre;
     protected Cedula cedula;
 

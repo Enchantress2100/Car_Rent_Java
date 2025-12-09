@@ -1,11 +1,19 @@
-// Representa la cédula de identidad, separando el número y el dígito verificador (maximo 10 caracteres)
-public class Cedula {
+package modelo;
+import java.io.Serializable;
+
+//representa la cédula de identidad, separando el número y el dígito verificador (maximo 10 caracteres)
+public class Cedula implements Serializable {
     private String numero;
     private char digitoVerificador;
 
     public Cedula(String numero, char digitoVerificador) {
         this.numero = numero;
         this.digitoVerificador = digitoVerificador;
+    }
+
+    //obtener el numero como string para validar
+    public String getNumero() {
+        return numero;
     }
 
     /**
@@ -16,25 +24,28 @@ public class Cedula {
      */
     public boolean esValida() {
 
-        // 1. Validar el largo (máximo 10 caracteres como pediste)
+        //validar el largo (máximo 10 caracteres)
         if (this.numero == null || this.numero.isEmpty() || this.numero.length() > 10) {
             return false;
         }
 
-        // 2. Validar que el string contenga solo números
+        //validar que el string contenga solo números
         for (char c : this.numero.toCharArray()) {
             if (c < '0' || c > '9') {
                 return false; // No es un numero
             }
         }
 
-        // 3. Validar el dígito verificador (lógica anterior)
+        //validar el dígito verificador
         char dv = Character.toLowerCase(this.digitoVerificador);
         boolean dvValido = (dv >= '0' && dv <= '9') || dv == 'k';
 
-        return dvValido; // Ya validamos el número en los pasos 1 y 2
+        return dvValido;
     }
 
+    public char getDigitoVerificador() {
+        return digitoVerificador;
+    }
     @Override
     public String toString() {
         return numero + "-" + digitoVerificador;

@@ -1,5 +1,8 @@
+package modelo;
+import java.io.Serializable;
+
 // Representa el ticket
-public class Ticket {
+public class Ticket implements Serializable {
     private int idTicket;
     private String detalle;
 
